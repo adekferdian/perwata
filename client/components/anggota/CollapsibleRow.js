@@ -76,10 +76,10 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
             className="text-center font-weight-bolder"
             style={{ width: "1%", border: "none" }}
           ></td>
-          <td className="text-left font-weight-bolder" style={{ minWidth: 50, border: "none", width: "15%" }}>
+          <td className="text-left font-weight-bolder" style={{ minWidth: 200, border: "none",  }}>
             NAMA
           </td>
-          <td className="text-left font-weight-bolder" style={{ minWidth: 50, border: "none" }}>
+          <td className="text-left font-weight-bolder" style={{ minWidth: 200, border: "none" }}>
             KAMPUNG
           </td>
         </tr>
@@ -115,7 +115,7 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
                   </td>
                   <td
                     className="text-left"
-                    style={{ minWidth: 50,  borderTop: "0px", width: "15%" }}
+                    style={{ minWidth: 200,  borderTop: "0px", }}
                   >
                     {
                       item.name
@@ -123,7 +123,7 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
                   </td>
                   <td
                     className="text-left"
-                    style={{ minWidth: 50, borderTop: "0px" }}
+                    style={{ minWidth: 200, borderTop: "0px" }}
                   >
                     {
                       item.hometown
@@ -139,11 +139,17 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
                   className="m-2 pt-2 pb-2 shadow"
                   style={{ paddingLeft: "1rem" }}
                 >
-                  <Col>Tanggal Lahir : {item.dateOfBirth}</Col>
-                  <Col>Domisili : {item.domisili}</Col>
-                  <Col>Nama Istri : {item.partnerName}</Col>
-                  <Col>Nama Istri : {item.partnerName}</Col>
-                  <Col>Asal Istri : {item.partnerFrom}</Col>
+                  <Col><p>Tanggal Lahir : {item.dateOfBirth}</p></Col>
+                  <Col><p>Domisili : {item.domisili}</p></Col>
+                  <Col><p>Nama Istri : {item.partnerName}</p></Col>
+                  <Col><p>Nama Istri : {item.partnerName}</p></Col>
+                  <Col><p>Asal Istri : {item.partnerFrom}</p></Col>
+                  <Col><p>Anak : <span>{item.Children !== false ? item.Children.map((el, idx) => {
+                    return (
+                      <p key={idx}>{idx+1}. {el.name}</p>
+                    )
+                  }) : null}</span></p>
+                  </Col>
                 </CardBody>
               </Collapse>
             </Card>

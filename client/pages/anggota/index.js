@@ -36,11 +36,36 @@ const Anggota = ({
     const [countPagination, setCountPagination] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [showLimit, setShowLimit] = useState(10);
-    const [isLogin, setIslogin] = useState(false);
+    const [isLogin, setIslogin] = useState(true);
     const getData = async() => {
         const res = await axios({
             method: "GET",
             url: "https://frozen-citadel-29769.herokuapp.com/users?page=0&size=10",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+            responseType: "json",
+        })
+        if (res.status === 200) {
+            setDataTable(res.data.rows);
+            console.log(dataTable);
+            setTotalPage(res.data.count);
+            setLengthData(res.data.count);
+            if (res.data.rows == false) {
+            setCurrentLength(0);
+            }
+            if (showLimit - res.data.count > 0) {
+            setCountPagination(res.data.count);
+            } else {
+            setCountPagination(null);
+            }
+        }
+    };
+
+    const handleSearch = async(e) => {
+        const res = await axios({
+            method: "GET",
+            url: `https://frozen-citadel-29769.herokuapp.com/users?page=0&size=10&searchValue=${e.target.value}`,
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
             },
@@ -99,7 +124,6 @@ const Anggota = ({
                                     // toggle={resetNew}
                                     contentClassName="border-radius-20"
                                     >
-                                    <ModalHeader>Add New KPI</ModalHeader>
                                     <ModalBody>
                                         <Form 
                                             // onSubmit={addNew}
@@ -213,7 +237,7 @@ const Anggota = ({
                                         }
                                     }}
                                     onChange={(e) => {
-                                        // handleSearch(e);
+                                        handleSearch(e);
                                     }}
                                     />
                                 </Col>
