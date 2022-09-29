@@ -76,7 +76,7 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
             className="text-center font-weight-bolder"
             style={{ width: "1%", border: "none" }}
           ></td>
-          <td className="text-left font-weight-bolder" style={{ minWidth: 50, border: "none" }}>
+          <td className="text-left font-weight-bolder" style={{ minWidth: 50, border: "none", width: "15%" }}>
             NAMA
           </td>
           <td className="text-left font-weight-bolder" style={{ minWidth: 50, border: "none" }}>
@@ -108,17 +108,25 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
                 >
                   <td
                     className="text-center"
-                    style={{ width: "10%", borderTop: "0px", border: "none" }}
+                    style={{ width: "1%", borderTop: "0px", border: "none" }}
                     onClick={() => handleCollapseToggle(index)}
                   >
                     <ChevronUp size={14} />
                   </td>
                   <td
                     className="text-left"
-                    style={{ minWidth: 50, borderTop: "0px" }}
+                    style={{ minWidth: 50,  borderTop: "0px", width: "15%" }}
                   >
                     {
                       item.name
+                    }
+                  </td>
+                  <td
+                    className="text-left"
+                    style={{ minWidth: 50, borderTop: "0px" }}
+                  >
+                    {
+                      item.hometown
                     }
                   </td>
                 </tr>
@@ -129,17 +137,13 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
               >
                 <CardBody
                   className="m-2 pt-2 pb-2 shadow"
-                  style={{ paddingLeft: "12rem", paddingRight: "6rem" }}
+                  style={{ paddingLeft: "1rem" }}
                 >
-                    <p>hi</p>
-                  {/* <Row>
-                    <Col>Created by : {item.createdByName}</Col>
-                    <Col>Updated by : {item.updatedByname}</Col>
-                  </Row>
-                  <Row>
-                    <Col>Created Date : {item.createdDate}</Col>
-                    <Col>Updated Date : {item.updatedDate}</Col>
-                  </Row> */}
+                  <Col>Tanggal Lahir : {item.dateOfBirth}</Col>
+                  <Col>Domisili : {item.domisili}</Col>
+                  <Col>Nama Istri : {item.partnerName}</Col>
+                  <Col>Nama Istri : {item.partnerName}</Col>
+                  <Col>Asal Istri : {item.partnerFrom}</Col>
                 </CardBody>
               </Collapse>
             </Card>
