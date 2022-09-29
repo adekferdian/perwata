@@ -1,0 +1,1 @@
+export const url = `https://balance-score-card--apicast-staging.apps.alpha.kalbe.co.id:443/api/v1/MasterData/`
