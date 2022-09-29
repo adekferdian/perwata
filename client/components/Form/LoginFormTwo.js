@@ -33,7 +33,7 @@ const LoginFormTwo = () => {
       <CardBody>
         <Link href="/">
           <a className="brand-logo">
-            <Image src="/images/logo/kalbe-logo.png" width={113} height={51} />
+            <Image alt="" src="/images/logo/kalbe-logo.png" width={113} height={51} />
           </a>
         </Link>
         <Form
@@ -76,7 +76,7 @@ const LoginFormTwo = () => {
           {
             errorLogin ?
             <FormGroup>
-              <p style={{color: "red"}}>"Wrong Username or password"</p>
+              <p style={{color: "red"}}>Wrong Username or password</p>
             </FormGroup>
             :null
           }
