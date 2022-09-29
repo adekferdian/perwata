@@ -36,7 +36,7 @@ const Anggota = ({
     const [countPagination, setCountPagination] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [showLimit, setShowLimit] = useState(10);
-    const [isLogin, setIslogin] = useState(true);
+    const [isLogin, setIslogin] = useState(false);
     const getData = async() => {
         const res = await axios({
             method: "GET",
