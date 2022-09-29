@@ -18,7 +18,7 @@ import Card from "reactstrap/lib/Card";
 import { Row, Col } from "reactstrap";
 import { Plus } from "react-feather";
 import ReactPaginate from "react-paginate";
-import CollapsibleRow from "./CollapsibleRow";
+import CollapsibleRow from "../../components/anggota/CollapsibleRow";
 
 const Anggota = ({
 
