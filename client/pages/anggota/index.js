@@ -97,7 +97,7 @@ const Anggota = ({
                 <Fragment>
                     <TabContent className="py-50" activeTab={true}>
                         <Card className="card-table2">
-                            <Card className="pt-0" style={{ border: "1px solid #d8d6de" }}>
+                            {/* <Card className="pt-0" style={{ border: "1px solid #d8d6de" }}>
                                 <Row className="mx-0">
                                 <Col
                                     className="d-flex align-items-center justify-content-start mt-1"
@@ -184,7 +184,7 @@ const Anggota = ({
                                     </Modal>
                                 </Col>
                                 </Row>
-                            </Card>
+                            </Card> */}
                             <Card className="pt-2" style={{ border: "1px solid #d8d6de" }}>
                                 <Row className="mx-0 mb-2">
                                 <Col
@@ -208,6 +208,18 @@ const Anggota = ({
                                         // onClick={() => setShowLimit(10)}
                                     >
                                         10
+                                    </option>
+                                    <option
+                                        value="50"
+                                        // onClick={() => setShowLimit(50)}
+                                    >
+                                        50
+                                    </option>
+                                    <option
+                                        value="100"
+                                        // onClick={() => setShowLimit(100)}
+                                    >
+                                        100
                                     </option>
                                     {/* <option value="25" onClick={() => setShowLimit(25)}>
                                         25

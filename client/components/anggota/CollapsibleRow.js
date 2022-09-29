@@ -142,7 +142,6 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
                   <Col><p>Tanggal Lahir : {item.dateOfBirth}</p></Col>
                   <Col><p>Domisili : {item.domisili}</p></Col>
                   <Col><p>Nama Istri : {item.partnerName}</p></Col>
-                  <Col><p>Nama Istri : {item.partnerName}</p></Col>
                   <Col><p>Asal Istri : {item.partnerFrom}</p></Col>
                   <Col><p>Anak : <span>{item.Children !== false ? item.Children.map((el, idx) => {
                     return (
