@@ -1,0 +1,44 @@
+[debug] [2022-09-29T12:16:02.403Z] ----------------------------------------------------------------------
+[debug] [2022-09-29T12:16:02.404Z] Command:       /opt/homebrew/Cellar/node/18.4.0/bin/node /opt/homebrew/bin/firebase init
+[debug] [2022-09-29T12:16:02.404Z] CLI Version:   11.11.0
+[debug] [2022-09-29T12:16:02.404Z] Platform:      darwin
+[debug] [2022-09-29T12:16:02.404Z] Node Version:  v18.4.0
+[debug] [2022-09-29T12:16:02.405Z] Time:          Thu Sep 29 2022 19:16:02 GMT+0700 (Western Indonesia Time)
+[debug] [2022-09-29T12:16:02.405Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-09-29T12:16:02.408Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-09-29T12:16:02.408Z] > authorizing via signed-in user (adekferdian@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/adekferdian/Documents/clone_perwata/perwata/client
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2022-09-29T12:16:34.997Z] > refreshing access token with scopes: []
+[debug] [2022-09-29T12:16:35.001Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-09-29T12:16:35.001Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-09-29T12:16:35.171Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2022-09-29T12:16:35.171Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-09-29T12:16:35.172Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2022-09-29T12:16:35.172Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"perwata12","name":"perwata12"}
+[debug] [2022-09-29T12:16:36.400Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 401
+[debug] [2022-09-29T12:16:36.401Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"service":"cloudresourcemanager.googleapis.com","method":"google.cloudresourcemanager.v1.Projects.CreateProject"}}]}}
+[debug] [2022-09-29T12:16:41.417Z] Error: Timed out.
+    at Timeout._onTimeout (/opt/homebrew/lib/node_modules/firebase-tools/lib/utils.js:253:49)
+    at listOnTimeout (node:internal/timers:564:17)
+    at process.processTimers (node:internal/timers:507:7)
+[error] 
+[error] Error: An unexpected error has occurred.
