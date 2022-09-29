@@ -36,7 +36,7 @@ const Anggota = ({
     const getData = async() => {
         const res = await axios({
             method: "GET",
-            url: "http://localhost:3001/users?page=0&size=10",
+            url: "https://frozen-citadel-29769.herokuapp.com/users?page=0&size=10",
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
             },
