@@ -23,7 +23,10 @@ export default function ModalValidation(props) {
 
     const onLogin = () => {
         if (userName === "admin" && password === "perwata100") {
-            props.onSubmit(true)
+            props.onSubmit(true);
+        } else if (userName === "super admin" && password === "perwata100") {
+            props.onSubmit(true);
+            props.setSuperAdmin(true);
         } else {
             setErrorLogin(true);
         };

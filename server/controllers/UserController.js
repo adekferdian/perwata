@@ -3,51 +3,102 @@ const { Users, Children } = require("../models");
 
 class UserController {
     static findAll(req, res, next) {
-        console.log("masuk<<<<<<<<<<,");
-        const { page, size, searchValue } = req.query;
+        const { page, size, searchValue, kampung } = req.query;
         if (searchValue === undefined) {
-            Users.findAndCountAll({
-                order: [
-                    [
-                        "updatedAt", "DESC"
-                    ]
-                ],
-                include: [{ model: Children }],
-                limit: size,
-                offset: page * size,
-            })
-                .then((data) => {
-                    return res.status(200).json({ count: data.rows.length, rows: data.rows });
+            if (kampung === undefined) {
+                Users.findAndCountAll({
+                    order: [
+                        [
+                            "updatedAt", "DESC"
+                        ]
+                    ],
+                    include: [{ model: Children }],
+                    limit: size,
+                    offset: page * size,
                 })
-                .catch((error) => {
-                    next ({
-                        name: "notFound",
-                        errors: [{ msg: "Data Not Found" }]
+                    .then((data) => {
+                        return res.status(200).json({ count: data.rows.length, rows: data.rows });
+                    })
+                    .catch((error) => {
+                        next ({
+                            name: "notFound",
+                            errors: [{ msg: "Data Not Found" }]
+                        });
                     });
-                });
             } else {
-            Users.findAndCountAll({
-                order: [
-                    [
-                        "updatedAt", "DESC"
-                    ]
-                ],
-                include: [{ model: Children }],
-                limit: size,
-                offset: page * size,
-                where: {
-                    name: {[Op.iLike]: `%${searchValue}%`}
-                }
-            })
-                .then((data) => {
-                    return res.status(200).json({ count: data.rows.length, rows: data.rows });
+                Users.findAndCountAll({
+                    order: [
+                        [
+                            "updatedAt", "DESC"
+                        ]
+                    ],
+                    include: [{ model: Children }],
+                    limit: size,
+                    offset: page * size,
+                    where: {
+                        hometown: {[Op.iLike]: kampung}
+                    }
                 })
-                .catch(() => {
-                    next ({
-                        name: "notFound",
-                        errors: [{ msg: "Data Not Found" }]
+                    .then((data) => {
+                        return res.status(200).json({ count: data.rows.length, rows: data.rows });
+                    })
+                    .catch((error) => {
+                        next ({
+                            name: "notFound",
+                            errors: [{ msg: "Data Not Found" }]
+                        });
                     });
-                });
+
+            }
+        } else {
+            if (kampung === undefined) {
+                Users.findAndCountAll({
+                    order: [
+                        [
+                            "updatedAt", "DESC"
+                        ]
+                    ],
+                    include: [{ model: Children }],
+                    limit: size,
+                    offset: page * size,
+                    where: {
+                        name: {[Op.iLike]: `%${searchValue}%`}
+                    }
+                })
+                    .then((data) => {
+                        return res.status(200).json({ count: data.rows.length, rows: data.rows });
+                    })
+                    .catch(() => {
+                        next ({
+                            name: "notFound",
+                            errors: [{ msg: "Data Not Found" }]
+                        });
+                    });
+                } else {
+                    Users.findAndCountAll({
+                        order: [
+                            [
+                                "updatedAt", "DESC"
+                            ]
+                        ],
+                        include: [{ model: Children }],
+                        limit: size,
+                        offset: page * size,
+                        where: {
+                            name: {[Op.iLike]: `%${searchValue}%`},
+                            hometown: {[Op.iLike]: kampung}
+                        }
+                    })
+                        .then((data) => {
+                            return res.status(200).json({ count: data.rows.length, rows: data.rows });
+                        })
+                        .catch(() => {
+                            next ({
+                                name: "notFound",
+                                errors: [{ msg: "Data Not Found" }]
+                            });
+                        });
+            }
         }
     };
 

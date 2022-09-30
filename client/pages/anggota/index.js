@@ -36,7 +36,8 @@ const Anggota = ({
     const [countPagination, setCountPagination] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [showLimit, setShowLimit] = useState(10);
-    const [isLogin, setIslogin] = useState(false);
+    const [isLogin, setIslogin] = useState(true);
+    const [superAdmin, setSuperAdmin] = useState(true);
     const getData = async() => {
         const res = await axios({
             method: "GET",
@@ -90,6 +91,30 @@ const Anggota = ({
     React.useEffect(() => {
         getData()
     }, []);
+
+    const listKampuang = [
+        {
+            name: "Melbar"
+        },
+        {
+            name: "Melteng"
+        },
+        {
+            name: "Sawahtangguang"
+        },
+        {
+            name: "K. Godang"
+        },
+        {
+            name: "K. Tongah"
+        },
+        {
+            name: "Balai Tabuah"
+        },
+        {
+            name: "Tobek"
+        },
+    ]
     return (
         <VerticalLayout>
             {
@@ -97,162 +122,121 @@ const Anggota = ({
                 <Fragment>
                     <TabContent className="py-50" activeTab={true}>
                         <Card className="card-table2">
-                            {/* <Card className="pt-0" style={{ border: "1px solid #d8d6de" }}>
-                                <Row className="mx-0">
-                                <Col
-                                    className="d-flex align-items-center justify-content-start mt-1"
-                                    xl="6"
-                                    md="4"
-                                    sm="12"
-                                >
-                                    <Button
-                                    color="custom"
-                                    className="button-table2 mr-2 mb-1"
-                                    style={{
-                                        width: "auto",
-                                        color: "white",
-                                        backgroundColor: "#87BEFF",
-                                    }}
-                                    // onClick={showNew}
-                                    >
-                                    <Plus size={14} />
-                                    <span className="align-middle ml-25">Tambah Anggota</span>
-                                    </Button>
-                                    <Modal
-                                    centered
-                                    // isOpen={newKPIModal}
-                                    // toggle={resetNew}
-                                    contentClassName="border-radius-20"
-                                    >
-                                    <ModalBody>
-                                        <Form 
-                                            // onSubmit={addNew}
-                                        >
-                                        <FormGroup className="mb-3">
-                                            <Label className="mr-1" for="search-input-1">
-                                            Year
-                                            </Label>
-                                            <CustomInput
-                                            id="yearValue"
-                                            type="select"
-                                            style={{ width: "auto" }}
-                                            defaultValue={new Date().getFullYear()}
+                            {
+                                superAdmin ?
+                                    <Card className="pt-0" style={{ border: "1px solid #d8d6de" }}>
+                                        <Row className="mx-0">
+                                            <Col
+                                                className="d-flex align-items-center justify-content-start mt-1"
+                                                xl="6"
+                                                md="4"
+                                                sm="12"
                                             >
-                                            <option value={new Date().getFullYear() + 1}>
-                                                {new Date().getFullYear() + 1}
-                                            </option>
-                                            <option value={new Date().getFullYear()}>
-                                                {new Date().getFullYear()}
-                                            </option>
-                                            <option value={new Date().getFullYear() - 1}>
-                                                {new Date().getFullYear() - 1}
-                                            </option>
-                                            </CustomInput>
-                                            <Label className="mr-1 mt-1" for="search-input-1">
-                                            KPI Type
-                                            </Label>
-                                            <Input
-                                            id="acceptNote"
-                                            placeholder="Enter KPI Type"
-                                            // onChange={(e) => setKPIType(e.target.value)}
-                                            defaultValue=""
-                                            required
-                                            />
-                                        </FormGroup>
-                                        <div className="d-flex justify-content-center w-100">
-                                            <Button
-                                            color="custom"
-                                            type="submit"
-                                            className="button button-primary button-large"
-                                            style={{
-                                                color: "white",
-                                                backgroundColor: "#87BEFF",
-                                            }}
-                                            >
-                                            Submit
-                                            </Button>
-                                            <div className="mx-2"></div>
-                                            <Button
-                                            className="button button-secondary button-large"
-                                            // onClick={resetNew}
-                                            >
-                                            Cancel
-                                            </Button>
-                                        </div>
-                                        </Form>
-                                    </ModalBody>
-                                    </Modal>
-                                </Col>
-                                </Row>
-                            </Card> */}
+                                                <Button
+                                                color="custom"
+                                                className="button-table2 mr-2 mb-1"
+                                                style={{
+                                                    width: "auto",
+                                                    color: "white",
+                                                    backgroundColor: "#87BEFF",
+                                                }}
+                                                // onClick={showNew}
+                                                >
+                                                <Plus size={14} />
+                                                    <span className="align-middle ml-25">Tambah Anggota</span>
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Card>
+                                    : null
+                            }
                             <Card className="pt-2" style={{ border: "1px solid #d8d6de" }}>
                                 <Row className="mx-0 mb-2">
-                                <Col
-                                    className="d-flex align-items-center justify-content-start mt-1"
-                                    xl="8"
-                                    md="4"
-                                    sm="12"
-                                >
-                                    <Label className="mr-1" for="search-input-1">
-                                    Tampilkan
-                                    </Label>
-                                    <CustomInput
-                                    id="pages"
-                                    type="select"
-                                    className="custominput-table2"
-                                    // onChange={(e) => handleSort(e)}
+                                    <Col
+                                        className="d-flex align-items-center justify-content-start mt-1"
+                                        xl="8"
+                                        md="4"
+                                        sm="12"
                                     >
-                                    <option
-                                        selected
-                                        value="10"
-                                        // onClick={() => setShowLimit(10)}
+                                        <Label className="mr-1" for="search-input-1">
+                                        Tampilkan
+                                        </Label>
+                                        <CustomInput
+                                        id="pages"
+                                        type="select"
+                                        className="custominput-table2"
+                                        // onChange={(e) => handleSort(e)}
+                                        >
+                                        <option
+                                            selected
+                                            value="10"
+                                            // onClick={() => setShowLimit(10)}
+                                        >
+                                            10
+                                        </option>
+                                        <option
+                                            value="50"
+                                            // onClick={() => setShowLimit(50)}
+                                        >
+                                            50
+                                        </option>
+                                        <option
+                                            value="100"
+                                            // onClick={() => setShowLimit(100)}
+                                        >
+                                            100
+                                        </option>
+                                        </CustomInput>
+                                    </Col>
+                                    <Col
+                                        sm="12"
+                                        md="12"
+                                        lg="12"
+                                        xl="4"
+                                        className="d-flex align-items-center justify-content-start mt-1"
                                     >
-                                        10
-                                    </option>
-                                    <option
-                                        value="50"
-                                        // onClick={() => setShowLimit(50)}
+                                        <Input
+                                        className="search-table2 mr-2"
+                                        type="text"
+                                        name="search"
+                                        id="search-invoice"
+                                        placeholder="Pencarian"
+                                        onKeyPress={(e) => {
+                                            if (e.key === "Enter") {
+                                            // searchFunction(e.target.value, altPage);
+                                            // setTempName(e.target.value);
+                                            }
+                                        }}
+                                        onChange={(e) => {
+                                            handleSearch(e);
+                                        }}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="mx-0 mb-2">
+                                    <Col
+                                        className="d-flex align-items-center justify-content-start mt-1"
+                                        xl="8"
+                                        md="4"
+                                        sm="12"
                                     >
-                                        50
-                                    </option>
-                                    <option
-                                        value="100"
-                                        // onClick={() => setShowLimit(100)}
-                                    >
-                                        100
-                                    </option>
-                                    {/* <option value="25" onClick={() => setShowLimit(25)}>
-                                        25
-                                    </option>
-                                    <option value="50" onClick={() => setShowLimit(50)}>
-                                        50
-                                    </option> */}
-                                    </CustomInput>
-                                </Col>
-                                <Col
-                                    sm="12"
-                                    md="12"
-                                    lg="12"
-                                    xl="4"
-                                    className="d-flex align-items-center justify-content-start mt-1"
-                                >
-                                    <Input
-                                    className="search-table2 mr-2"
-                                    type="text"
-                                    name="search"
-                                    id="search-invoice"
-                                    placeholder="Pencarian"
-                                    onKeyPress={(e) => {
-                                        if (e.key === "Enter") {
-                                        // searchFunction(e.target.value, altPage);
-                                        // setTempName(e.target.value);
-                                        }
-                                    }}
-                                    onChange={(e) => {
-                                        handleSearch(e);
-                                    }}
-                                    />
-                                </Col>
+                                        <Label className="mr-1" for="search-input-1">
+                                            Kampung
+                                        </Label>
+                                        <CustomInput
+                                            id="pages"
+                                            type="select"
+                                            className="custominput-table2"
+                                            style={{minWidth: 200}}
+                                        // onChange={(e) => handleSort(e)}
+                                        >
+                                            {
+                                                listKampuang.map((el, index) => (
+                                                    <option key={index} value={el.name}>{el.name}</option>
+                                                ))
+                                            }
+                                        </CustomInput>
+                                    </Col>
                                 </Row>
                                 <CollapsibleRow data={dataTable} />
                                 <Row className="mx-0 ml-2 mb-1">
@@ -303,6 +287,7 @@ const Anggota = ({
                 isCancel={() => {
                     router.back()
                 }}
+                setSuperAdmin={(bool) => setSuperAdmin(bool)}
                 />
             }
         </VerticalLayout>
