@@ -9,5 +9,4 @@ router.get("/", (err, res) => {
 router.use("/users", userRoutes);
 router.use("/children", childrenRoutes);
 
-
 module.exports = router;
