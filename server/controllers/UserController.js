@@ -20,6 +20,7 @@ class UserController {
                         return res.status(200).json({ count: data.rows.length, rows: data.rows });
                     })
                     .catch((error) => {
+                        console.log(error);
                         next ({
                             name: "notFound",
                             errors: [{ msg: "Data Not Found" }]
@@ -43,6 +44,7 @@ class UserController {
                         return res.status(200).json({ count: data.rows.length, rows: data.rows });
                     })
                     .catch((error) => {
+                        console.log(error);
                         next ({
                             name: "notFound",
                             errors: [{ msg: "Data Not Found" }]
@@ -132,6 +134,7 @@ class UserController {
             partnerFrom: req.body.partnerFrom,
             childs: req.body.childs,
             picture: req.body.picture,
+            phone: req.body.phone
         };
         Users.create(payload)
             .then((data) => {
@@ -158,6 +161,7 @@ class UserController {
             partnerFrom: req.body.partnerFrom,
             childs: [req.body.childs],
             picture: req.body.picture,
+            phone: req.body.phone
         };
         Users.update(payload, {
             where: {

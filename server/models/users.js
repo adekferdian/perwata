@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     partnerName: DataTypes.STRING,
     partnerFrom: DataTypes.STRING,
     childs: DataTypes.STRING,
-    picture: DataTypes.STRING
+    picture: DataTypes.STRING,
+    phone: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Users',
