@@ -288,7 +288,7 @@ const Anggota = ({
             name: "Polak soko",
             value: "Polak soko",
         },
-    ]
+    ];
     return (
         <VerticalLayout>
             {
@@ -314,7 +314,11 @@ const Anggota = ({
                                                     color: "white",
                                                     backgroundColor: "#87BEFF",
                                                 }}
-                                                // onClick={showNew}
+                                                onClick={() => {
+                                                    router.push({
+                                                        pathname: "/anggota/Add"
+                                                    })
+                                                }}
                                                 >
                                                 <Plus size={14} />
                                                     <span className="align-middle ml-25">Tambah Anggota</span>

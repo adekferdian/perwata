@@ -140,7 +140,8 @@ class UserController {
             .then((data) => {
                 return res.status(201).json({ data });
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err, "<<<<<");
                 next({
                     name: "InternalServerError",
                     error: [{ msg: "Failed to Create" }]

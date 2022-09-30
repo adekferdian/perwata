@@ -45,7 +45,7 @@ const NavbarComponent = (props) => {
         </ul>
       </div>
       <ul className="nav navbar-nav align-items-center">
-        <h1>PERWATA</h1>
+        {/* <h1>PERWATA</h1> */}
       </ul>
     </Fragment>
   );
