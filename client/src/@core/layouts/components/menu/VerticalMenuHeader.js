@@ -1,6 +1,8 @@
 // ** React Imports
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import Perwata from "../../../../../public/images/icons/perwataa.jpeg";
 
 const VerticalMenuHeader = (props) => {
   // ** Props
@@ -25,6 +27,7 @@ const VerticalMenuHeader = (props) => {
             <a className="navbar-brand active">
               <span className="brand-logo">
                 {/* <img src="/images/logo/logo.svg" alt="logo" /> */}
+                <Image src={Perwata} width={30} height={30} alt="" />
               </span>
               <h2
                 className="brand-text text-black mb-0"

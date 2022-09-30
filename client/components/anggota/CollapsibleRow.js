@@ -1,6 +1,6 @@
 import { useState } from "react";
 import classnames from "classnames";
-import { ChevronUp } from "react-feather";
+import { ChevronUp, Eye } from "react-feather";
 import {
   Collapse,
   Card,
@@ -19,31 +19,13 @@ import {
   ModalBody,
   Form,
 } from "reactstrap";
-import { Edit, CheckCircle, XCircle } from "react-feather";
 import Edit_ic from "../../public/images/icons/edit.png";
+import Trash_Ic from "../../public/images/icons/trash-2.png";
 import Image from 'next/image'
 import router from "next/router";
 
-const CollapsibleRow = ({ data, active, type, kpiType }) => {
+const CollapsibleRow = ({ data, active, type, superAdmin }) => {
   var defaultEditableRow = new Array(data.length).fill(true);
-  const [editableRow, setEditableRow] = useState(defaultEditableRow);
-  const [newKPIModal, setKPIModal] = useState(false);
-
-  const showNew = () => setKPIModal(true);
-  console.log(data);
-  const resetNew = () => {
-    setKPIModal(false);
-    setKPIType("");
-  };
-
-  const addNew = (e) => {
-    event.preventDefault();
-    const KPIData = {
-      topikData: {
-        name: kpiType,
-      },
-    };
-  };
 
   const defaultActive = () => [active];
   const [openCollapse, setOpenCollapse] = useState(defaultActive());
@@ -82,6 +64,13 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
           <td className="text-left font-weight-bolder" style={{ minWidth: 200, border: "none" }}>
             KAMPUNG
           </td>
+          {
+            superAdmin ?
+            <td className="text-left font-weight-bolder" style={{ minWidth: 100, border: "none" }}>
+              AKSI
+            </td>
+            :null
+          }
         </tr>
       </thead>
       <tbody
@@ -127,6 +116,20 @@ const CollapsibleRow = ({ data, active, type, kpiType }) => {
                   >
                     {
                       item.hometown
+                    }
+                  </td>
+                  <td
+                    className="text-left"
+                    style={{ minWidth: 200, borderTop: "0px" }}
+                  >
+                    {
+                      superAdmin ?
+                      <div style={{display: "flex", justifyContent: "space-between", width: 50}}>
+                        <Image src={Edit_ic} width={20} height={20} />
+                        <Image src={Trash_Ic} width={20} height={20} />
+                      </div>
+                      :
+                      null
                     }
                   </td>
                 </tr>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useState, useReducer} from "react";
 import VerticalLayout from "../../src/@core/layouts/VerticalLayout";
 import {
     TabContent,
@@ -25,6 +25,7 @@ import { useRouter } from 'next/router';
 const Anggota = ({
 
 }) => {
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
     const router = useRouter();
     const [dataTable, setDataTable] = useState([]);
     const [listYear, setListYear] = useState([]);
@@ -37,11 +38,13 @@ const Anggota = ({
     const [pageNumber, setPageNumber] = useState(1);
     const [showLimit, setShowLimit] = useState(10);
     const [isLogin, setIslogin] = useState(true);
+    const [searchValue, setSearchValue] = useState("");
     const [superAdmin, setSuperAdmin] = useState(true);
+    const [kampung, setKampung] = useState("");
     const getData = async() => {
         const res = await axios({
             method: "GET",
-            url: "https://frozen-citadel-29769.herokuapp.com/users?page=0&size=10",
+            url: `https://frozen-citadel-29769.herokuapp.com/users?page=0&size=${showLimit}`,
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
             },
@@ -64,9 +67,59 @@ const Anggota = ({
     };
 
     const handleSearch = async(e) => {
+        if (kampung !== "") {
+            const res = await axios({
+                method: "GET",
+                url: `https://frozen-citadel-29769.herokuapp.com/users?page=0&size=${showLimit}&kampung=${kampung}&searchValue=${e.target.value}`,
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+                responseType: "json",
+            })
+            if (res.status === 200) {
+                setDataTable(res.data.rows);
+                console.log(dataTable);
+                setTotalPage(res.data.count);
+                setLengthData(res.data.count);
+                if (res.data.rows == false) {
+                setCurrentLength(0);
+                }
+                if (showLimit - res.data.count > 0) {
+                setCountPagination(res.data.count);
+                } else {
+                setCountPagination(null);
+                }
+            }
+        } else {
+            const res = await axios({
+                method: "GET",
+                url: `https://frozen-citadel-29769.herokuapp.com/users?page=0&size=${showLimit}&searchValue=${e.target.value}`,
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+                responseType: "json",
+            })
+            if (res.status === 200) {
+                setDataTable(res.data.rows);
+                console.log(dataTable);
+                setTotalPage(res.data.count);
+                setLengthData(res.data.count);
+                if (res.data.rows == false) {
+                setCurrentLength(0);
+                }
+                if (showLimit - res.data.count > 0) {
+                setCountPagination(res.data.count);
+                } else {
+                setCountPagination(null);
+                }
+            }
+        }
+    };
+
+    const handleFilterKampung = async(e) => {
         const res = await axios({
             method: "GET",
-            url: `https://frozen-citadel-29769.herokuapp.com/users?page=0&size=10&searchValue=${e.target.value}`,
+            url: `https://frozen-citadel-29769.herokuapp.com/users?page=0&size=${showLimit}&kampung=${e.target.value}`,
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
             },
@@ -86,6 +139,8 @@ const Anggota = ({
             setCountPagination(null);
             }
         }
+        setKampung(e.target.value);
+        forceUpdate();
     };
 
     React.useEffect(() => {
@@ -94,25 +149,144 @@ const Anggota = ({
 
     const listKampuang = [
         {
-            name: "Melbar"
+            name: "Semua",
+            value: ""
         },
         {
-            name: "Melteng"
+            name: "Sawah tangguang",
+            value: "Sawah tangguang",
         },
         {
-            name: "Sawahtangguang"
+            name: "Polak loweh ",
+            value: "Polak loweh ",
         },
         {
-            name: "K. Godang"
+            name: "Sumur Ampaleh",
+            value: "Sumur Ampaleh",
         },
         {
-            name: "K. Tongah"
+            name: "Meltas",
+            value: "Meltas",
         },
         {
-            name: "Balai Tabuah"
+            name: "Mandailiang Ate",
+            value: "Mandailiang Ate",
         },
         {
-            name: "Tobek"
+            name: "Melteng",
+            value: "Melteng",
+        },
+        {
+            name: "Kutianyir",
+            value: "Kutianyir",
+        },
+        {
+            name: "Melbar",
+            value: "Melbar",
+        },
+        {
+            name: "Balai Batu",
+            value: "Balai Batu",
+        },
+        {
+            name: "Tobek",
+            value: "Tobek",
+        },
+        {
+            name: "Topi Selo",
+            value: "Topi Selo",
+        },
+        {
+            name: "Tobiang",
+            value: "Tobiang",
+        },
+        {
+            name: "Pono",
+            value: "Pono",
+        },
+        {
+            name: "Piliang",
+            value: "Piliang",
+        },
+        {
+            name: "Palagan",
+            value: "Palagan",
+        },
+        {
+            name: "Balai tabuah",
+            value: "Balai tabuah",
+        },
+        {
+            name: "Subarang lobuah",
+            value: "Subarang lobuah",
+        },
+        {
+            name: "Iku Tanjuang",
+            value: "Iku Tanjuang",
+        },
+        {
+            name: "Kampuang Godang",
+            value: "Kampuang Godang",
+        },
+        {
+            name: "Batang situak",
+            value: "Batang situak",
+        },
+        {
+            name: "Aur kuniang",
+            value: "Aur kuniang",
+        },
+        {
+            name: "Lugha",
+            value: "Lugha",
+        },
+        {
+            name: "Kampung Tongah",
+            value: "Kampung Tongah",
+        },
+        {
+            name: "Rumah Baghu",
+            value: "Rumah Baghu",
+        },
+        {
+            name: "Salo",
+            value: "Salo",
+        },
+        {
+            name: "Kampuang Panjang",
+            value: "Kampuang Panjang",
+        },
+        {
+            name: "Bakubang",
+            value: "Bakubang",
+        },
+        {
+            name: "Mandailiang subarang",
+            value: "Mandailiang subarang",
+        },
+        {
+            name: "Mandailiang Bawuah",
+            value: "Mandailiang Bawuah",
+        },
+        {
+            name: "Basukun",
+            value: "Basukun",
+        },
+        {
+            name: "Batunjam",
+            value: "Batunjam",
+        },
+        {
+            name: "Kampuang Baru",
+            value: "Kampuang Baru",
+        },
+        {
+            name: "Pandan",
+            value: "Pandan",
+        },
+        {
+            name: "Polak soko",
+            value: "Polak soko",
         },
     ]
     return (
@@ -202,10 +376,7 @@ const Anggota = ({
                                         id="search-invoice"
                                         placeholder="Pencarian"
                                         onKeyPress={(e) => {
-                                            if (e.key === "Enter") {
-                                            // searchFunction(e.target.value, altPage);
-                                            // setTempName(e.target.value);
-                                            }
+                                            
                                         }}
                                         onChange={(e) => {
                                             handleSearch(e);
@@ -223,22 +394,23 @@ const Anggota = ({
                                         <Label className="mr-1" for="search-input-1">
                                             Kampung
                                         </Label>
-                                        <CustomInput
+                                        <Input
                                             id="pages"
                                             type="select"
                                             className="custominput-table2"
                                             style={{minWidth: 200}}
-                                        // onChange={(e) => handleSort(e)}
+                                            onChange={(e) => handleFilterKampung(e)}
+                                            value={kampung}
                                         >
                                             {
                                                 listKampuang.map((el, index) => (
-                                                    <option key={index} value={el.name}>{el.name}</option>
+                                                    <option key={index} value={el.value}>{el.name}</option>
                                                 ))
                                             }
-                                        </CustomInput>
+                                        </Input>
                                     </Col>
                                 </Row>
-                                <CollapsibleRow data={dataTable} />
+                                <CollapsibleRow data={dataTable} superAdmin={superAdmin} />
                                 <Row className="mx-0 ml-2 mb-1">
                                     <Col
                                     className="d-flex align-items-center justify-content-start mt-1"
