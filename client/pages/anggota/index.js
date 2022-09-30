@@ -41,6 +41,7 @@ const Anggota = ({
     const [superAdmin, setSuperAdmin] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [kampung, setKampung] = useState("");
+    const [sorted, setSorted] = useState([]);
     const getData = async() => {
         const res = await axios({
             method: "GET",
@@ -118,6 +119,8 @@ const Anggota = ({
     };
 
     const handleFilterKampung = async(e) => {
+        console.log(e.target.value);
+        setKampung(e.target.value);
         const res = await axios({
             method: "GET",
             url: `https://frozen-citadel-29769.herokuapp.com/users?page=0&size=${showLimit}&kampung=${e.target.value}`,
@@ -140,13 +143,8 @@ const Anggota = ({
             setCountPagination(null);
             }
         }
-        setKampung(e.target.value);
         forceUpdate();
     };
-
-    React.useEffect(() => {
-        getData()
-    }, []);
 
     const listKampuang = [
         {
@@ -290,6 +288,14 @@ const Anggota = ({
             value: "Polak soko",
         },
     ];
+
+    React.useEffect(() => {
+        getData()
+        const a = listKampuang.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+        setSorted(a)
+    }, []);
+
+
     return (
         <VerticalLayout>
             {
@@ -407,10 +413,15 @@ const Anggota = ({
                                             onChange={(e) => handleFilterKampung(e)}
                                             value={kampung}
                                         >
+                                            <option disabled value="">Semua</option>
                                             {
-                                                listKampuang.map((el, index) => (
-                                                    <option key={index} value={el.value}>{el.name}</option>
-                                                ))
+                                                sorted.map((el, index) => {
+                                                    if (el.value !== "") {
+                                                        return (
+                                                            <option defaultValue={kampung} key={index} value={el.value}>{el.name}</option>
+                                                        )
+                                                    }
+                                                })
                                             }
                                         </Input>
                                     </Col>
