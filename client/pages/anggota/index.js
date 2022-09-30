@@ -37,9 +37,9 @@ const Anggota = ({
     const [countPagination, setCountPagination] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [showLimit, setShowLimit] = useState(10);
-    const [isLogin, setIslogin] = useState(true);
+    const [isLogin, setIslogin] = useState(false);
+    const [superAdmin, setSuperAdmin] = useState(false);
     const [searchValue, setSearchValue] = useState("");
-    const [superAdmin, setSuperAdmin] = useState(true);
     const [kampung, setKampung] = useState("");
     const getData = async() => {
         const res = await axios({
@@ -51,6 +51,7 @@ const Anggota = ({
             responseType: "json",
         })
         if (res.status === 200) {
+            console.log(res);
             setDataTable(res.data.rows);
             console.log(dataTable);
             setTotalPage(res.data.count);
@@ -414,7 +415,7 @@ const Anggota = ({
                                         </Input>
                                     </Col>
                                 </Row>
-                                <CollapsibleRow data={dataTable} superAdmin={superAdmin} />
+                                <CollapsibleRow data={dataTable} superAdmin={superAdmin} refresh={() => getData()} />
                                 <Row className="mx-0 ml-2 mb-1">
                                     <Col
                                     className="d-flex align-items-center justify-content-start mt-1"

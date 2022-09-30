@@ -7,14 +7,16 @@ import {
 } from "reactstrap";
 import AlertValidation from "../../components/alerts/AlertValidation";
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 const Add = ({
 
 }) => {
+    const router = useRouter();
     const [name, setName] = React.useState("");
     const [dateOfBirth, setDateOfBirth] = React.useState("");
     const [domisili, setDomisili] = React.useState("");
-    const [mothername, setMotherName] = React.useState("");
+    const [motherName, setMotherName] = React.useState("");
     const [fatherName, setFatherName] = React.useState("");
     const [hometown, setHometown] = React.useState("");
     const [partnerName, setPartnerName] = React.useState("");
@@ -164,7 +166,7 @@ const Add = ({
         if (visibleAlert === false) {
             setVisibleAlert(true);
         } else {
-            if (!name || !dateOfBirth || !domisili || !mothername || !fatherName || !hometown || !partnerName || !partnerFrom || !phone) {
+            if (!name || !dateOfBirth || !domisili || !motherName || !fatherName || !hometown || !partnerName || !partnerFrom || !phone) {
 
             } else {
                 console.log("aa");
@@ -172,7 +174,7 @@ const Add = ({
                     name,
                     dateOfBirth,
                     domisili,
-                    mothername,
+                    motherName,
                     fatherName,
                     hometown,
                     partnerName,
@@ -187,6 +189,10 @@ const Add = ({
                     data: body
                 });
                 console.log(res);
+                if (res.status === 201) {
+                    setVisibleAlert(false);
+                    router.back();
+                }
             }
         }
     };
@@ -246,7 +252,7 @@ const Add = ({
                                         <Input
                                             type="text"
                                             placeholder="Nama"
-                                            value={mothername}
+                                            value={motherName}
                                             onChange={(e) => setMotherName(e.target.value)}
                                         />
                                     </div>

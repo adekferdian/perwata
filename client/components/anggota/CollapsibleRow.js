@@ -23,12 +23,13 @@ import Edit_ic from "../../public/images/icons/edit.png";
 import Trash_Ic from "../../public/images/icons/trash-2.png";
 import Image from 'next/image'
 import router from "next/router";
+import ModalEdit from "../alerts/ModalEdit";
 
-const CollapsibleRow = ({ data, active, type, superAdmin }) => {
-  var defaultEditableRow = new Array(data.length).fill(true);
-
+const CollapsibleRow = ({ data, active, type, superAdmin, refresh }) => {
   const defaultActive = () => [active];
   const [openCollapse, setOpenCollapse] = useState(defaultActive());
+  const [visibleEdit, setVisibleEdit] = useState(false);
+  const [dataEdit, setDataEdit] = useState([]);
 
   const handleCollapseToggle = (id) => {
     const arr = openCollapse,
@@ -49,6 +50,14 @@ const CollapsibleRow = ({ data, active, type, superAdmin }) => {
 
   return (
     <Table responsive className="table border-bottom">
+      {
+        visibleEdit ?
+        <ModalEdit isOpen={visibleEdit} isCancel={() => setVisibleEdit(false)} data={dataEdit} isSuccess={() => {
+          setVisibleEdit(false);
+          refresh()
+        }} />
+        :null
+      }
       <thead>
         <tr
           className="d-flex align-items-center"
@@ -125,7 +134,10 @@ const CollapsibleRow = ({ data, active, type, superAdmin }) => {
                     {
                       superAdmin ?
                       <div style={{display: "flex", justifyContent: "space-between", width: 50}}>
-                        <Image src={Edit_ic} width={20} height={20} />
+                        <Image src={Edit_ic} width={20} height={20} onClick={() => {
+                          setVisibleEdit(true);
+                          setDataEdit(item)
+                        }} />
                         <Image src={Trash_Ic} width={20} height={20} />
                       </div>
                       :
